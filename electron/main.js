@@ -2,7 +2,10 @@ const {app, BrowserWindow} =require('electron');// 引入electron
 let win;
 let windowConfig = {
 	width:800,
-	height:600
+	height:600,
+	resizable: false,
+	frame: false,
+	transparent: true
 };
 
 if(process.argv[1] === '.'){
@@ -12,7 +15,7 @@ if(process.argv[1] === '.'){
 function createWindow(){
 	win = new BrowserWindow(windowConfig);// 创建一个窗口
 	// todo 若是本地开发，此处应当是localhost
-	
+
 	// win.loadURL(`file://${__dirname}/index.html`);// 在窗口内要展示的内容index.html 就是打包生成的index.html
 	win.loadURL('http://localhost:8080')
 	win.webContents.openDevTools();  // 开启调试工具
