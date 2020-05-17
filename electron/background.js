@@ -1,12 +1,5 @@
-const {app, BrowserWindow, ipcMain, shell} =require('electron');// 引入electron
-
-// console.log = function() {
-//     ipcMain.send('async-msg',[...arguments])
-// };
-
-ipcMain.on('async-msg', (event, arg) => {
-
-});
+import ipcControl from './ipcMain';
+const {app, BrowserWindow} =require('electron');// 引入electron
 
 let win;
 let windowConfig = {
@@ -14,12 +7,16 @@ let windowConfig = {
     height:600,
     resizable: false,
     frame: false,
-    transparent: true
+    transparent: true,
+    webPreferences: {
+        nodeIntegration: true
+    }
 };
 
 // 窗口配置程序运行窗口的大小
 function createWindow(){
     win = new BrowserWindow(windowConfig);// 创建一个窗口
+    ipcControl.useWindow(win);
     // win.loadURL(`file://${__dirname}/index.html`);// 在窗口内要展示的内容index.html 就是打包生成的index.html
     if(process.env.NODE_ENV === 'development'){
         win.loadURL('http://localhost:8080');
@@ -31,9 +28,9 @@ function createWindow(){
         // 回收BrowserWindow对象
         win = null;
     });
-    win.on('resize',() => {
+    win.on('resize', () => {
         win.reload();
-    })
+    });
 }
 app.on('ready',createWindow);
 app.on('window-all-closed',() => {
@@ -44,3 +41,4 @@ app.on('activate',() => {
         createWindow();
     }
 });
+

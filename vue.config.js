@@ -21,7 +21,7 @@ module.exports = {
     pluginOptions: {
         electronBuilder: {
             // // Use this to change the entrypoint of your app's main process
-            // mainProcessFile: 'electron/main.js',
+            mainProcessFile: 'electron/background.js',
             builderOptions: {
                 "appId": "com.example.app",
                 "productName":"aDemo",//项目名，也是生成的安装文件名，即aDemo.exe

@@ -1,10 +1,6 @@
 <template>
 	<div id="app">
-		<div id="nav">
-			<router-link to="/">hahah</router-link> |
-			<router-link to="/about">About</router-link>
-		</div>
-		<router-view/>
+		<div class="xixi">123</div>
 	</div>
 </template>
 
@@ -12,7 +8,8 @@
     export default {
         name: 'App',
 		mounted() {
-            console.log(process.env)
+            this.$ipcRenderer.send('msg','windowReady','123');
+            console.log(process.env);
         }
     }
 </script>
