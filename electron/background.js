@@ -1,7 +1,23 @@
 import ipcControl from './ipcMain';
-const {app, BrowserWindow} =require('electron');// 引入electron
+import {
+    createProtocol,
+    installVueDevtools
+} from 'vue-cli-plugin-electron-builder/lib'
+
+const isDevelopment = process.env.NODE_ENV !== 'production'
+const {app, BrowserWindow, protocol} =require('electron');// 引入electron
 
 let win;
+// Scheme must be registered before the app is ready
+// 有了protoco才能通过app://的形式去请求到资源，资源被打包在app.asar文件中，可使用asar的npm包解压
+protocol.registerSchemesAsPrivileged([{
+    scheme: 'app',
+    privileges: {
+        secure: true,
+        standard: true
+    }
+}])
+// 窗口的配置
 let windowConfig = {
     width:800,
     height:600,
@@ -19,9 +35,12 @@ function createWindow(){
     ipcControl.useWindow(win);
     // win.loadURL(`file://${__dirname}/index.html`);// 在窗口内要展示的内容index.html 就是打包生成的index.html
     if(process.env.NODE_ENV === 'development'){
-        win.loadURL('http://localhost:8080');
+        win.loadURL(process.env.WEBPACK_DEV_SERVER_URL);
     }else{
-        win.loadFile('./index.html')
+        // win.loadFile('./index.html')
+        createProtocol('app')
+        // Load the index.html when not in development
+        win.loadURL('app://./index.html')
     }
     win.webContents.openDevTools();  // 开启调试工具
     win.on('close',() => {
@@ -32,7 +51,17 @@ function createWindow(){
         win.reload();
     });
 }
-app.on('ready',createWindow);
+app.on('ready',async ()=>{
+    if (isDevelopment) {
+        // Install Vue Devtools
+        try {
+            await installVueDevtools()
+        } catch (e) {
+            console.error('Vue Devtools failed to install:', e.toString())
+        }
+    }
+    createWindow();
+});
 app.on('window-all-closed',() => {
     app.quit();
 });
