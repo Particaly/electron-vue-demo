@@ -3,6 +3,7 @@ import App from '@/App.vue'
 import router from '@/router'
 import store from '@/store'
 import {ipcRenderer} from '@/common.js'
+import '@/assets/common.scss'
 
 Vue.config.productionTip = false;
 Vue.prototype.$ipcRenderer = ipcRenderer;

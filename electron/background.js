@@ -1,8 +1,8 @@
 import ipcControl from './ipcMain';
 import {
-    createProtocol,
-    installVueDevtools
-} from 'vue-cli-plugin-electron-builder/lib'
+    createProtocol
+} from 'vue-cli-plugin-electron-builder/lib';
+import Econfig from './electron.config';
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 const {app, BrowserWindow, protocol} =require('electron');// 引入electron
@@ -23,7 +23,7 @@ let windowConfig = {
     height:600,
     resizable: false,
     frame: false,
-    transparent: true,
+    // transparent: true,
     webPreferences: {
         nodeIntegration: true
     }
@@ -55,7 +55,8 @@ app.on('ready',async ()=>{
     if (isDevelopment) {
         // Install Vue Devtools
         try {
-            await installVueDevtools()
+            let path = Econfig.vuedevtool;
+            BrowserWindow.addDevToolsExtension(path);
         } catch (e) {
             console.error('Vue Devtools failed to install:', e.toString())
         }
