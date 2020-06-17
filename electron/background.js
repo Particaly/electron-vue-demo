@@ -23,7 +23,7 @@ let windowConfig = {
     height:600,
     resizable: false,
     frame: false,
-    // transparent: true,
+    transparent: true,
     webPreferences: {
         nodeIntegration: true
     }
