@@ -3,10 +3,11 @@
 </template>
 
 <script>
+	import moment from 'moment'
     export default {
         name: "Time",
 		mounted(){
-            
+            console.log(moment())
 		}
     }
 </script>

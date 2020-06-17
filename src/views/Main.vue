@@ -1,10 +1,14 @@
 <template>
-	<div class="main"></div>
+	<div class="main">
+		<Time></Time>
+	</div>
 </template>
 
 <script>
+	import Time from '@/components/common/Time'
     export default {
-        name: "Main"
+        name: "Main",
+		components:{Time}
     }
 </script>
 
