@@ -20,5 +20,6 @@
 	border-radius: 5px;
 	border: 1px solid rgba(255,255,255,.16);
 	overflow: hidden;
+	padding: 15px;
 }
 </style>
