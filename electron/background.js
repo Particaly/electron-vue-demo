@@ -5,9 +5,10 @@ import {
 import Econfig from './electron.config';
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
-const {app, BrowserWindow, protocol} =require('electron');// 引入electron
+const {app, BrowserWindow, protocol, Tray, Menu} =require('electron');// 引入electron
 
 let win;
+let tray = null;
 // Scheme must be registered before the app is ready
 // 有了protoco才能通过app://的形式去请求到资源，资源被打包在app.asar文件中，可使用asar的npm包解压
 protocol.registerSchemesAsPrivileged([{
@@ -21,9 +22,12 @@ protocol.registerSchemesAsPrivileged([{
 let windowConfig = {
     width:800,
     height:600,
+    title: '桌面时间控件',
     resizable: false,
-    frame: false,
+    frame: false,            // 菜单栏
     transparent: true,
+    fullscreenable: false,
+    skipTaskbar: true,       // 是否跳过在任务栏显示图标
     webPreferences: {
         nodeIntegration: true
     }
@@ -62,6 +66,7 @@ app.on('ready',async ()=>{
         }
     }
     createWindow();
+    initTray();
 });
 app.on('window-all-closed',() => {
     app.quit();
@@ -72,3 +77,18 @@ app.on('activate',() => {
     }
 });
 
+// 桌面系统托盘图表功能区
+function initTray() {
+    tray = new Tray('./src/assets/logo.png');
+    const contextMenu = Menu.buildFromTemplate([
+        { label: 'Item1', type: 'radio' },
+        { label: 'Item2', type: 'radio' },
+        { label: 'Item3', type: 'radio', checked: true },
+        { label: 'Item4', type: 'radio' }
+    ])
+    tray.setToolTip('This is my application.');
+    tray.setContextMenu(contextMenu);
+    tray.on('click', () => {
+        win.show();
+    });
+}
