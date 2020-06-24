@@ -22,7 +22,7 @@
 		    refreshTime(){
 		        requestAnimationFrame(this.refreshTime);
 		        const momenter = moment();
-				const now = momenter.format('h:mm:ss');
+				const now = momenter.format('H:mm:ss');
                 const date = momenter.format('YYYY年M月D日');
 				if(this.time !== now){
 				    this.time = now;
