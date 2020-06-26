@@ -1,6 +1,8 @@
 <template>
 	<div class="time-holder">
-		<div class="time">{{time}}</div>
+		<div class="time">
+			<span :class="{maohao: item===':'}" v-for="(item,key) in time" v-bind:key="key">{{item}}</span>
+		</div>
 		<div class="date">{{date}}</div>
 	</div>
 </template>
@@ -41,9 +43,18 @@
 	font-size: 48px;
 	color: white;
 	opacity: 0.85;
-	text-align: left;
+	text-align: center;
 	.time{
-		width: 150px;
+		width: 100%;
+		display: flex;
+		span{
+			display: flex;
+			width: 24px;
+			justify-content: flex-end;
+			&.maohao{
+				width: 8px;
+			}
+		}
 	}
 	.date{
 		font-family: "Microsoft YaHei", "serif";
