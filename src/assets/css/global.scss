@@ -1,24 +1,37 @@
-// 变量
+// css变量
+:root{
+    --mainColorRed: 46;
+    --mainColorGreen: 209;
+    --mainColorBlue: 255;
+}
+
+// 函数
+@function getColor($color){
+    @return red($color) + ',' + green($color) + ',' + blue($color)
+}
+
+// sass变量
+$mainColor: var(--mainColorRed) + ',' + var(--mainColorGreen) + ',' + var(--mainColorBlue);
 $timeBlockWidth: 180px;
 $timeBlockHeight: 100px;
 
 // css
 .border{
-  border: 2px solid rgba(46, 209, 255, 0.2);
-  box-shadow: 0 0 10px rgba(46, 209,255,.1),
-  0 0 5px rgba(46, 209,255,.1) inset;
-  border-radius: 5px;
+    border: 2px solid rgba($mainColor, .7);
+    box-shadow: 0 0 10px rgba($mainColor, .3),
+    0 0 5px rgba(46, 209,255,.1) inset;
+    border-radius: 5px;
 }
 .inner-border{
-  border-right:  1px solid rgba(46, 209, 255, 0.2);
-  border-bottom: 1px solid rgba(46, 209, 255, 0.2);
-  box-shadow: 0 0 5px rgba(46, 209,255,.1) inset;
-  border-radius: 0;
-  border-left: none;
-  border-top: none;
-  &:last-child{
-    border-right: none;
-  }
+    border-right:  1px solid rgba($mainColor, .4);
+    border-bottom: 1px solid rgba($mainColor, .4);
+    box-shadow: 0 0 50px rgba($mainColor, .1) inset;
+    border-radius: 0;
+    border-left: none;
+    border-top: none;
+    &:last-child{
+        border-right: none;
+    }
 }
 
 // 动画
