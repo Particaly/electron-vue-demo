@@ -23,7 +23,7 @@
 .main{
 	width: 100%;
 	height: 100%;
-	background: rgba(0,0,0,.3);
+	background-image: linear-gradient(60deg, rgba(41,50,60,.8) 0%, rgba(72,85,99,.8) 100%);
 	border-radius: 5px;
 	border: 1px solid rgba(255,255,255,.16);
 	overflow: hidden;
@@ -37,7 +37,7 @@
 	}
 	.block-date{
 		margin-top: 20px;
-		height: 450px;
+		height: calc(100% - #{$timeBlockHeight} - 20px);
 	}
 }
 </style>

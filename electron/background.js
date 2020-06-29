@@ -5,7 +5,7 @@ import {
 import Econfig from './electron.config';
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
-const {app, BrowserWindow, protocol, Tray, Menu} =require('electron');// 引入electron
+const {app, BrowserWindow, protocol, Tray, Menu, remote} =require('electron');// 引入electron
 
 let win;
 let tray = null;
@@ -20,8 +20,8 @@ protocol.registerSchemesAsPrivileged([{
 }])
 // 窗口的配置
 let windowConfig = {
-    width:800,
-    height:600,
+    width:700,
+    height:700,
     title: '桌面时间控件',
     resizable: false,
     frame: false,            // 菜单栏
