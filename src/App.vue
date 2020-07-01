@@ -1,5 +1,6 @@
 <template>
 	<div id="app">
+		<div class="maintitle"></div>
 		<router-view></router-view>
 	</div>
 </template>
@@ -23,5 +24,15 @@
 		color: #2c3e50;
 		width: 100%;
 		height: 100%;
+		position: relative;
+	}
+	.maintitle{
+		height: 50px;
+		width: 100%;
+		background: #42b983;
+		-webkit-app-region: drag;
+		position: absolute;
+		top: 0;
+		left: 0;
 	}
 </style>

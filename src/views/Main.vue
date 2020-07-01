@@ -14,7 +14,15 @@
 	import Date from "@/components/Main/Date";
     export default {
         name: "Main",
-		components:{Time,Date}
+		components:{Time,Date},
+		created(){
+        	document.addEventListener('mousemove',this.mouseMove);
+		},
+		methods: {
+		    mouseMove(e){
+		    	console.log(e);
+			}
+		},
     }
 </script>
 
@@ -28,6 +36,7 @@
 	border: 1px solid rgba(255,255,255,.16);
 	overflow: hidden;
 	padding: 15px;
+	pointer-events: none;
 	.blocks-time{
 		width: $timeBlockWidth;
 		height: $timeBlockHeight;
